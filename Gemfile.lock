@@ -82,6 +82,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    bson (5.0.0)
     builder (3.2.4)
     capybara (3.40.0)
       addressable
@@ -99,6 +100,10 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dotenv (3.1.0)
+    dotenv-rails (3.1.0)
+      dotenv (= 3.1.0)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.12.0)
     globalid (1.2.1)
@@ -128,6 +133,8 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.22.3)
+    mongo (2.20.0)
+      bson (>= 4.14.1, < 6.0.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
     net-imap (0.4.10)
@@ -244,8 +251,10 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dotenv-rails
   importmap-rails
   jbuilder
+  mongo (~> 2)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.2)
   selenium-webdriver
