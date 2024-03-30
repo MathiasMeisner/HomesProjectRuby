@@ -6,6 +6,7 @@ ruby "3.2.3"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "mongo", "~> 2"
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'rubyXL'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
