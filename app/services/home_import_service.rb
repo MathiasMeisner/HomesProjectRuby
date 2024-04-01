@@ -49,9 +49,9 @@ class HomeImportService
                 { '$set' => { imageurl: home[:imageurl] } }
               )
       
-              unless update_result.modified_count > 0
-                puts "Failed to update existing home: #{home[:address]}"
-              end
+              # unless update_result.modified_count > 0
+              #   puts "Failed to update existing home: #{home[:address]}"
+              # end
             else
               puts "New home has no image URL, skipping update: #{home[:address]}"
             end

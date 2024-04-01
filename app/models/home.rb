@@ -5,5 +5,6 @@ class Home
     
     attr_accessor :_id, :address, :municipality, :price, :squaremeters, :constructionyear, :energylabel, :imageurl
     
+    validates_presence_of :address, :municipality, :price
   end
   

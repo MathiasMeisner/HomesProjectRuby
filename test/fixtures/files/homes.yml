@@ -1,0 +1,10 @@
+# test/fixtures/homes.yml
+
+one:
+  address: 123 Main St
+  municipality: Exampleville
+  price: 100000
+  squaremeters: 150
+  constructionyear: 2000
+  energylabel: A
+  imageurl: http://example.com/image.jpg
