@@ -2,85 +2,167 @@
 body, ul, li, p {
     margin: 0;
     padding: 0;
-  }
-  
-  /* Container styles */
-  .container {
-    max-width: 1200px;
+}
+
+/* Container styles */
+.container {
+    width: 1500px; /* Initial width */
     margin: 0 auto;
+}
+
+/* Searchbar container styles */
+.searchbar-container {
+    width: 100%;
+}
+
+/* Homes container styles */
+.homes-container {
+    width: 100%;
     padding: 20px;
-  }
-  
-  /* Header styles */
-  .header {
+}
+
+/* Footer container styles */
+.footer-container {
+    width: 100%;
+}
+
+/* Header styles */
+.header {
     background-color: #005A8D;
     color: #fff;
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
-  }
-  
-  /* Homes list styles */
-  #homesList {
+}
+
+/* Homes list styles */
+#homesList {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
-  }
-  
-  #homesList li {
+}
+
+#homesList li {
     background-color: #F7F7F7;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  #homesList li img {
+    max-width: none;
+}
+
+#homesList li img {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
     margin-bottom: 10px;
-  }
-  
-  .home-details {
+}
+
+.home-details {
     margin-top: 10px;
     font-size: 14px;
     color: #555;
-  }
-  
-  /* Footer styles */
-  .footer {
+}
+
+/* Footer styles */
+.footer {
     background-color: #005A8D;
     color: #fff;
     padding: 20px;
     text-align: center;
     margin-top: 20px;
-  }
-  
-  /* Navigation bar styles */
-  .navbar {
-    background-color: #005A8D; /* Background color */
-    color: #fff; /* Text color */
+}
+
+/* Navigation bar styles */
+.navbar {
+    width: 100%;
+    background-color: #005A8D;
+    color: #fff;
     padding: 10px 20px;
-  }
-  
-  .navbar-nav {
+}
+
+.navbar-nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-  }
-  
-  .nav-item {
+}
+
+.nav-item {
     margin-right: 20px;
-  }
-  
-  .nav-link {
-    color: #fff; /* Text color */
+}
+
+.nav-link {
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
-  }
-  
-  .nav-link:hover {
+}
+
+.nav-link:hover {
     text-decoration: underline;
-  }
+}
+
+/* Search/filter section styles */
+.search-section {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.search-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.search-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #005a8d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #004477;
+}
+
+.search-parameters {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-parameter {
+    width: 30%;
+}
+
+.parameter-values {
+    display: flex;
+    flex-direction: column;
+}
+
+.parameter-value {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.parameter-value label {
+    margin-right: 10px;
+}
+
+

@@ -7,30 +7,85 @@
     <title>Homes List</title>
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
-        </ul>
-    </nav>
-
     <div class="container">
-        <header class="header">
-            <h1>Realtor's Homes List</h1>
-        </header>
-        <ul id="homesList">
-            <!-- JavaScript will populate this list -->
-        </ul>
-        <footer class="footer">
-            <p>&copy; 2024 Realtor's Website</p>
-        </footer>
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="searchbar-container">
+    <div class="search-section">
+        <h2 class="search-title">Search Homes</h2>
+        <div class="search-parameters">
+            <!-- Price -->
+            <div class="search-parameter">
+                <div class="parameter-title">Price</div>
+                <div class="parameter-values">
+                    <div class="parameter-value">
+                        <label for="min-price">Min:</label>
+                        <input type="number" id="min-price" class="search-input" placeholder="Min Price">
+                    </div>
+                    <div class="parameter-value">
+                        <label for="max-price">Max:</label>
+                        <input type="number" id="max-price" class="search-input" placeholder="Max Price">
+                    </div>
+                </div>
+            </div>
+            <!-- Square Meters -->
+            <div class="search-parameter">
+                <div class="parameter-title">Sq. Meters</div>
+                <div class="parameter-values">
+                    <div class="parameter-value">
+                        <label for="min-sqm">Min:</label>
+                        <input type="number" id="min-sqm" class="search-input" placeholder="Min Sq. Meters">
+                    </div>
+                    <div class="parameter-value">
+                        <label for="max-sqm">Max:</label>
+                        <input type="number" id="max-sqm" class="search-input" placeholder="Max Sq. Meters">
+                    </div>
+                </div>
+            </div>
+            <!-- Construction Year -->
+            <div class="search-parameter">
+                <div class="parameter-title">Construction Year</div>
+                <div class="parameter-values">
+                    <div class="parameter-value">
+                        <label for="min-year">Min:</label>
+                        <input type="number" id="min-year" class="search-input" placeholder="Min Construction Year">
+                    </div>
+                    <div class="parameter-value">
+                        <label for="max-year">Max:</label>
+                        <input type="number" id="max-year" class="search-input" placeholder="Max Construction Year">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="search-button">Search</button>
+    </div>
+</div>
+
+
+
+        <div class="homes-container">
+            <ul id="homesList">
+                <!-- JavaScript will populate this list -->
+            </ul>
+        </div>
+
+        <div class="footer-container">
+            <footer class="footer">
+                <p>2024 Realtor Website</p>
+            </footer>
+        </div>
     </div>
 
     <%= javascript_include_tag 'controllers/homes' %>
