@@ -23,9 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const fetchFilteredHomesData = () => {
     const minPrice = document.getElementById("minPrice").value;
     const maxPrice = document.getElementById("maxPrice").value;
+    const minSqm = document.getElementById("minSqm").value;
+    const maxSqm = document.getElementById("maxSqm").value;
+    const minConstructionyear = document.getElementById(
+      "minConstructionyear"
+    ).value;
+    const maxConstructionyear = document.getElementById(
+      "maxConstructionyear"
+    ).value;
 
     fetch(
-      `http://localhost:3000/api/homes/filter_homes?min_price=${minPrice}&max_price=${maxPrice}`
+      `http://localhost:3000/api/homes/filter_homes?min_price=${minPrice}&max_price=${maxPrice}&min_sqm=${minSqm}&max_sqm=${maxSqm}&min_constructionyear=${minConstructionyear}&max_constructionyear=${maxConstructionyear}`
     )
       .then((response) => {
         if (!response.ok) {
