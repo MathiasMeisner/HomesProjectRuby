@@ -10,12 +10,26 @@ body, ul, li, p {
 }
 
 /* Homes list styles */
+/* Updated CSS */
 #homesList {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-}
+    position: relative; /* Set the parent container position to relative */
+  }
+  
+  .home-item {
+    position: relative; /* Set the position of each home item to relative */
+  }
+  
+  .favorite-btn {
+    position: absolute; /* Set the position of the heart icon to absolute */
+    top: 10px; /* Adjust top position as needed */
+    right: 10px; /* Adjust right position as needed */
+    z-index: 1; /* Ensure the heart icon is above the home image */
+  }
+  
 
 #homesList li {
     background-color: #F7F7F7;
@@ -36,6 +50,18 @@ body, ul, li, p {
     font-size: 14px;
     color: #555;
 }
+
+/* Heart icons styles */
+.heart-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .heart-icons i {
+    margin-left: 5px;
+  }
+  
 
 /* Navigation bar styles */
 .navbar {

@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const displayHomes = (data) => {
     data.forEach((home) => {
       const li = document.createElement("li");
+      li.classList.add("home-item", "position-relative");
+
       // Check if the home has an image URL
       if (home.imageurl) {
         const img = document.createElement("img");
@@ -83,6 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
       squaremeters.textContent = `Square meters: ${home.squaremeters}`;
       li.appendChild(squaremeters);
 
+      // Add heart icon
+      const heartIcon = document.createElement("i");
+      heartIcon.classList.add("far", "fa-heart", "text-danger");
+      heartIcon.style.position = "absolute";
+      heartIcon.style.bottom = "0";
+      heartIcon.style.right = "0";
+      heartIcon.style.margin = "10px";
+      li.appendChild(heartIcon);
+
+      // Add event listener to toggle heart icon classes on hover
+      const heartContainer = document.createElement("div");
+      heartContainer.classList.add("heart-container");
+      heartContainer.appendChild(heartIcon);
+      heartContainer.addEventListener("mouseenter", () => {
+        heartIcon.classList.remove("far");
+        heartIcon.classList.add("fas");
+      });
+
+      heartContainer.addEventListener("mouseleave", () => {
+        heartIcon.classList.remove("fas");
+        heartIcon.classList.add("far");
+      });
+
+      li.appendChild(heartContainer);
+
+      // Append list item to homes list
       homesList.appendChild(li);
     });
   };
