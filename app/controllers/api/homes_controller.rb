@@ -1,7 +1,12 @@
 class Api::HomesController < ApplicationController
+  before_action :set_current_user
+
   def index
     collection = MongoClient[:homes]
     @homes = collection.find.map { |doc| Home.new(doc) }
+
+    puts "Session user_id: #{session[:user_id]}"
+    puts "Current user: #{@current_user.inspect}"
 
     respond_to do |format|
       format.json { render json: @homes }
@@ -54,5 +59,16 @@ class Api::HomesController < ApplicationController
       []
     end
   end
-  
+
+  private
+
+  private
+
+  def set_current_user
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    else
+      @current_user = nil
+    end
+  end
 end

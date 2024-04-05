@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <%= stylesheet_link_tag 'registration' %>
+  <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card login-card"> <!-- Add the login-card class here -->
+      <div class="card-header">
+        Login
+      </div>
+      <div class="card-body">
+        <%= form_with(url: login_path, method: :post) do |form| %>
+          <% if flash[:alert] %>
+            <div><%= flash[:alert] %></div>
+          <% end %>
+
+          <div class="form-group">
+            <%= form.label :email %>
+            <%= form.email_field :email, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :password %>
+            <%= form.password_field :password, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.submit "Login", class: "btn btn-primary btn-block" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
