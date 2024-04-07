@@ -2,13 +2,16 @@ class FavoritesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:create, :destroy]
 
     def create
-        favorite_params = { user_id: params[:user_id], home_id: params[:home_id] }
-        if save_favorite(favorite_params)
-          render json: { message: 'Favorite created successfully' }, status: :created
-        else
-          render json: { error: 'Failed to create favorite' }, status: :unprocessable_entity
-        end
+      user_id = params[:user_id]
+      home_id = params[:home_id]
+    
+      if save_favorite(user_id, home_id)
+        render json: { message: 'Favorite created successfully' }, status: :created
+      else
+        render json: { message: 'Home already added to favorites' }, status: :ok
       end
+    end
+    
       
       def index
         user_id = params[:user_id]
@@ -46,15 +49,34 @@ class FavoritesController < ApplicationController
 
     private
 
-    def save_favorite(favorite)
-        begin
-          result = MongoClient[:favorites].insert_one({ user_id: favorite[:user_id], home_id: favorite[:home_id] })
-          return result.inserted_id.present?
-        rescue => e
-          Rails.logger.error "Error saving favorite: #{e.message}"
-          return false
-        end
-      end
+    def favorite_exists?(user_id, home_id)
+      # Check if a favorite with the specified user_id and home_id exists
+      MongoClient[:favorites].find(user_id: user_id, home_id: home_id).count > 0
+    end
       
+    
+    def save_favorite(user_id, home_id)
+      begin
+        if favorite_exists?(user_id, home_id)
+          puts "Favorite already exists for user #{user_id} and home #{home_id}"
+          return false
+        else
+          result = MongoClient[:favorites].insert_one({ user_id: user_id, home_id: home_id })
+          if result.inserted_id.present?
+            puts "Favorite created for user #{user_id} and home #{home_id}"
+            return true
+          else
+            puts "Failed to create favorite for user #{user_id} and home #{home_id}"
+            return false
+          end
+        end
+      rescue => e
+        Rails.logger.error "Error saving favorite: #{e.message}"
+        puts "Error saving favorite: #{e.message}"
+        return false
+      end
+    end
+    
+    
   end
   

@@ -16,18 +16,18 @@ body, ul, li, p {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    position: relative; /* Set the parent container position to relative */
+    position: relative;
   }
   
   .home-item {
-    position: relative; /* Set the position of each home item to relative */
+    position: relative;
   }
   
   .favorite-btn {
-    position: absolute; /* Set the position of the heart icon to absolute */
-    top: 10px; /* Adjust top position as needed */
-    right: 10px; /* Adjust right position as needed */
-    z-index: 1; /* Ensure the heart icon is above the home image */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
   }
   
 

@@ -146,9 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
 
-    // Check if the form submitted is the add-to-favorites-form
     if (event.target.id === "add-to-favorites-form") {
-      // Submit form data using fetch
       fetch(event.target.action, {
         method: "POST",
         body: new FormData(event.target),
@@ -160,18 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.json();
         })
         .then((data) => {
-          // Display toast notification if favorite is created successfully
-          if (data.message === "Favorite created successfully") {
-            toast.querySelector(".toast-body").textContent = data.message;
-            toast.classList.remove("hide");
-            toast.classList.add("show");
+          // Display toast notification based on the response message
+          const toast = document.getElementById("toast");
+          toast.querySelector(".toast-body").textContent = data.message;
+          toast.classList.remove("hide");
+          toast.classList.add("show");
 
-            // Hide toast after a delay
-            setTimeout(function () {
-              toast.classList.remove("show");
-              toast.classList.add("hide");
-            }, 3000);
-          }
+          setTimeout(function () {
+            toast.classList.remove("show");
+            toast.classList.add("hide");
+          }, 3000);
         })
         .catch((error) => {
           console.error("Error creating favorite:", error);
