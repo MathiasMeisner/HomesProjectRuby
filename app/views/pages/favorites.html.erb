@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/api/homes">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -32,8 +32,7 @@
                                 <%= session[:user_id] %>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <%= link_to "Favorites", user_favorites_path(session[:user_id]), class: "dropdown-item" %>
-
+                            <%= link_to "Favorites", user_favorites_path(user_id: session[:user_id]), class: "dropdown-item" %>
                             <div class="dropdown-divider"></div>
                                 <%= link_to "Sign out", logout_path, method: :delete, class: "dropdown-item", data: { confirm: "Are you sure you want to log out?" } %>
                             </div>
@@ -101,24 +100,31 @@
         <button id="searchButton" class="search-button">Search</button>
     </div>
 </div>
+
 <div id="user-id" data-user-id="<%= session[:user_id] %>"></div>
 
 
-        <div class="homes-container">
-            <ul id="homesList">
-                <!-- JavaScript will populate this list -->
-            </ul>
-        </div>
-    </div>
+<div class="homes-container">
+    <ul id="homesList">
+        <!-- JavaScript will populate this list -->
+        <% @favorites.each do |home| %>
+            <li class="home-item" data-image-url="<%= home.imageurl %>" data-address="<%= home.address %>" data-municipality="<%= home.municipality %>" data-price="<%= home.price %>" data-squaremeters="<%= home.squaremeters %>" data-home-id="<%= home._id %>">
+    <!-- Content will be dynamically added by JavaScript -->
+</li>
 
-    <div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <% end %>
+    </ul>
+</div>
+
+<div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-body"></div>
     </div>
 
-    <%= javascript_include_tag 'controllers/homes' %>
+    </div>
+
+    <%= javascript_include_tag 'controllers/favorites' %>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 </body>
 </html>

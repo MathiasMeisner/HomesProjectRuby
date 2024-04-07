@@ -10,7 +10,7 @@ class Api::HomesController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @homes }
-      format.html { render template: 'pages/homes' }
+      format.html { render template: 'pages/homes', locals: { user_id: @current_user&.id } }
     end
   end
 

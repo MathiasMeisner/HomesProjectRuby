@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
   const homesList = document.getElementById("homesList");
+  const toast = document.getElementById("toast");
 
   // Function to fetch all homes data
   const fetchAllHomesData = () => {
@@ -11,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then((data) => {
-        homesList.innerHTML = ""; // Clear previous homes list
-        displayHomes(data); // Display homes
+        homesList.innerHTML = "";
+        displayHomes(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((data) => {
         homesList.innerHTML = ""; // Clear previous homes list
-        displayHomes(data); // Display filtered homes
+        displayHomes(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -86,29 +87,47 @@ document.addEventListener("DOMContentLoaded", () => {
       li.appendChild(squaremeters);
 
       // Add heart icon
+      const addToFavoritesForm = document.createElement("form");
+      addToFavoritesForm.id = "add-to-favorites-form";
+      addToFavoritesForm.action = "/favorites/add";
+      addToFavoritesForm.method = "post";
+      addToFavoritesForm.classList.add(
+        "d-flex",
+        "justify-content-end",
+        "align-items-end"
+      );
+
+      const userIdInput = document.createElement("input");
+      userIdInput.type = "hidden";
+      userIdInput.name = "user_id";
+      userIdInput.value = document.getElementById("user-id").dataset.userId;
+      addToFavoritesForm.appendChild(userIdInput);
+
+      const homeIdInput = document.createElement("input");
+      homeIdInput.type = "hidden";
+      homeIdInput.name = "home_id";
+      homeIdInput.value = home._id;
+      addToFavoritesForm.appendChild(homeIdInput);
+
+      const heartButton = document.createElement("button");
+      heartButton.type = "submit";
+
       const heartIcon = document.createElement("i");
       heartIcon.classList.add("far", "fa-heart", "text-danger");
-      heartIcon.style.position = "absolute";
-      heartIcon.style.bottom = "0";
-      heartIcon.style.right = "0";
-      heartIcon.style.margin = "10px";
-      li.appendChild(heartIcon);
+      heartButton.appendChild(heartIcon);
 
-      // Add event listener to toggle heart icon classes on hover
-      const heartContainer = document.createElement("div");
-      heartContainer.classList.add("heart-container");
-      heartContainer.appendChild(heartIcon);
-      heartContainer.addEventListener("mouseenter", () => {
+      addToFavoritesForm.appendChild(heartButton);
+      li.appendChild(addToFavoritesForm);
+
+      heartIcon.addEventListener("mouseenter", () => {
         heartIcon.classList.remove("far");
         heartIcon.classList.add("fas");
       });
 
-      heartContainer.addEventListener("mouseleave", () => {
+      heartIcon.addEventListener("mouseleave", () => {
         heartIcon.classList.remove("fas");
         heartIcon.classList.add("far");
       });
-
-      li.appendChild(heartContainer);
 
       // Append list item to homes list
       homesList.appendChild(li);
@@ -122,4 +141,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch all homes data on page load
   fetchAllHomesData();
+
+  // Event listener for form submission
+  document.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Check if the form submitted is the add-to-favorites-form
+    if (event.target.id === "add-to-favorites-form") {
+      // Submit form data using fetch
+      fetch(event.target.action, {
+        method: "POST",
+        body: new FormData(event.target),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Display toast notification if favorite is created successfully
+          if (data.message === "Favorite created successfully") {
+            toast.querySelector(".toast-body").textContent = data.message;
+            toast.classList.remove("hide");
+            toast.classList.add("show");
+
+            // Hide toast after a delay
+            setTimeout(function () {
+              toast.classList.remove("show");
+              toast.classList.add("hide");
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          console.error("Error creating favorite:", error);
+        });
+    }
+  });
 });
